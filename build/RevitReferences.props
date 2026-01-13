@@ -3,7 +3,7 @@
     <RevitApiPath>C:\Program Files\Autodesk\Revit 2026</RevitApiPath>
     <UseLocalProject Condition="!Exists('$(RevitApiPath)\RevitAPI.dll')">true</UseLocalProject>
 <!--    Uncomment the below line when testing the Revit API stubs on a machine that actually has the DLLs.-->
-    <UseLocalProject>true</UseLocalProject>
+<!--    <UseLocalProject>true</UseLocalProject>-->
   </PropertyGroup>
 
   <ItemGroup Condition="'$(UseLocalProject)' == 'true'">
