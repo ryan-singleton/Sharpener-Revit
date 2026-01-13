@@ -20,14 +20,27 @@ jobs:
     runs-on: ubuntu-latest
     name: Update NuGet Package
     steps:
+      - name: Download Revit API DLLs
+        run: |
+          mkdir revit-api
+          curl -L -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" ^
+            ${{ secrets.ASSET_STORE }}/main/libs/revit/2026/RevitAPI.dll ^
+            -o revit-api/RevitAPI.dll
+
+          curl -L -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" ^
+            ${{ secrets.ASSET_STORE }}/main/libs/revit/2026/RevitAPIUI.dll ^
+            -o revit-api/RevitAPIUI.dll
+
       - name: Checkout code
         uses: actions/checkout@v3
+
       - name: Setup .NET
         uses: actions/setup-dotnet@v3
         with:
           dotnet-version: |
             5.0.x
             8.0.x
+
       - name: Restore dependencies
         run: |
           dotnet restore --source "https://api.nuget.org/v3/index.json" --no-cache
@@ -38,6 +51,7 @@ jobs:
               --password ${{ secrets.NUGET_PUBLISH_API_KEY }}
           fi
         shell: bash
+
       - name: Build and package
         run: |
           dotnet build --configuration Release --no-restore --source https://api.nuget.org/v3/index.json --verbosity minimal
@@ -46,6 +60,7 @@ jobs:
           else
             dotnet pack --configuration Release --no-restore --no-build --output ./bin/Release
           fi
+
       - name: Publish package to nuget.org
         run: |
           for PACKAGE in $(ls ./bin/Release/*.nupkg); do

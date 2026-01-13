@@ -1,34 +1,38 @@
 <Project>
   <PropertyGroup>
     <RevitApiPath>C:\Program Files\Autodesk\Revit 2026</RevitApiPath>
-    <UseLocalProject Condition="!Exists('$(RevitApiPath)\RevitAPI.dll')">true</UseLocalProject>
-<!--    Uncomment the below line when testing the Revit API stubs on a machine that actually has the DLLs.-->
-<!--    <UseLocalProject>true</UseLocalProject>-->
+    <DownloadedRevitApiPath>$(MSBuildProjectDirectory)\revit-api</DownloadedRevitApiPath>
+    <HasLocalRevitApi Condition="Exists('$(RevitApiPath)\RevitAPI.dll')">true</HasLocalRevitApi>
+    <HasDownloadedRevitApi Condition="Exists('$(DownloadedRevitApiPath)\RevitAPI.dll')">true</HasDownloadedRevitApi>
   </PropertyGroup>
 
-  <ItemGroup Condition="'$(UseLocalProject)' == 'true'">
-    <ProjectReference Include="..\..\stubs\Sharpener.RevitAPI\Sharpener.RevitAPI.csproj">
-      <Private>true</Private>
-      <IncludeAssets>compile</IncludeAssets>
-      <PrivateAssets>all</PrivateAssets>
-      <ExcludeAssets>runtime</ExcludeAssets>
-    </ProjectReference>
-    <ProjectReference Include="..\..\stubs\Sharpener.RevitAPIUI\Sharpener.RevitAPIUI.csproj">
-      <Private>true</Private>
-      <IncludeAssets>compile</IncludeAssets>
-      <PrivateAssets>all</PrivateAssets>
-      <ExcludeAssets>runtime</ExcludeAssets>
-    </ProjectReference>
-  </ItemGroup>
-
-  <ItemGroup Condition="'$(UseLocalProject)' != 'true'">
+  <ItemGroup Condition="'$(HasLocalRevitApi)' == 'true'">
     <Reference Include="RevitAPI">
       <HintPath>$(RevitApiPath)\RevitAPI.dll</HintPath>
-      <Private>False</Private>
+      <Private>false</Private>
     </Reference>
+
     <Reference Include="RevitAPIUI">
       <HintPath>$(RevitApiPath)\RevitAPIUI.dll</HintPath>
-      <Private>False</Private>
+      <Private>false</Private>
     </Reference>
   </ItemGroup>
+
+  <ItemGroup Condition="'$(HasLocalRevitApi)' != 'true' and '$(HasDownloadedRevitApi)' == 'true'">
+    <Reference Include="RevitAPI">
+      <HintPath>$(DownloadedRevitApiPath)\RevitAPI.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+
+    <Reference Include="RevitAPIUI">
+      <HintPath>$(DownloadedRevitApiPath)\RevitAPIUI.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+  </ItemGroup>
+
+  <Target Name="FailIfRevitApiMissing" BeforeTargets="ResolveReferences"
+          Condition="'$(HasLocalRevitApi)' != 'true' and '$(HasDownloadedRevitApi)' != 'true'">
+    <Error Text="RevitAPI.dll not found. Expected either a local Revit install or downloaded DLLs in 'revit-api'." />
+  </Target>
+
 </Project>
