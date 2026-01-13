@@ -8,7 +8,7 @@
     <UseWindowsForms>true</UseWindowsForms>
     <UseWPF>true</UseWPF>
     <EnableWindowsTargeting>true</EnableWindowsTargeting>
-    <SharedPackageVersion>1.0.8</SharedPackageVersion>
+    <SharedPackageVersion>1.0.9</SharedPackageVersion>
     <AssemblyVersion>$(SharedPackageVersion)</AssemblyVersion>
     <FileVersion>$(SharedPackageVersion)</FileVersion>
     <InformationalVersion>$(SharedPackageVersion)+$(GitCommitId)</InformationalVersion>
@@ -26,6 +26,10 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Sharpener"/>
+  </ItemGroup>
+  <ItemGroup> 
+    <Content Include="$(OutputPath)RevitAPI.dll" Pack="false" /> 
+    <Content Include="$(OutputPath)RevitAPIUI.dll" Pack="false" /> 
   </ItemGroup>
   <Import Project="..\..\build\RevitReferences.props"/>
 </Project>

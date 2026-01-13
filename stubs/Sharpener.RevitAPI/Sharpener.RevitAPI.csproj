@@ -2,6 +2,7 @@
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
     <RootNamespace>Autodesk.Revit</RootNamespace>
+    <AssemblyName>RevitAPI</AssemblyName>
     <GenerateDocumentationFile>false</GenerateDocumentationFile>
     <IsPackable>false</IsPackable>
     <IsPublishable>false</IsPublishable>
