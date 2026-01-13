@@ -7,9 +7,8 @@ namespace Autodesk.Revit.UI;
 // ReSharper disable once InconsistentNaming
 public class UIControlledApplication
 {
-    public event EventHandler<ThemeChangedEventArgs> ThemeChanged = null!;
-
     public ControlledApplication ControlledApplication { get; set; } = new();
+    public event EventHandler<ThemeChangedEventArgs> ThemeChanged = null!;
 
     public RibbonPanel CreateRibbonPanel(string name, string panelName)
     {
