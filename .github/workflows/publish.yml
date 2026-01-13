@@ -58,6 +58,7 @@ jobs:
         shell: bash
 
       - name: Build and package
+        shell: bash
         run: |
           dotnet build --configuration Release --no-restore --source https://api.nuget.org/v3/index.json --verbosity minimal
           if [[ "${{ github.ref }}" != "refs/heads/main" ]]; then
@@ -67,6 +68,7 @@ jobs:
           fi
 
       - name: Publish package to nuget.org
+        shell: bash
         run: |
           for PACKAGE in $(ls ./bin/Release/*.nupkg); do
             dotnet nuget push $PACKAGE -s "https://api.nuget.org/v3/index.json" -k ${{ secrets.NUGET_PUBLISH_API_KEY }} --skip-duplicate
