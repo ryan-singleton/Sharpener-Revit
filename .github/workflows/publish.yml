@@ -21,18 +21,20 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      - name: Download Revit API DLLs
+      - name: Download Revit API DLLs from Release
         shell: bash
         run: |
           mkdir -p revit-api
-          curl -L -H "Authorization: Bearer $GITHUB_TOKEN" \
-            ${{ vars.DEP_STORE }}/main/libs/revit/2026/RevitAPI.dll \
+
+          curl -L -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
+            "${{ vars.DEP_STORE }}/releases/download/2026deps/RevitAPI.dll" \
             -o revit-api/RevitAPI.dll
-          curl -L -H "Authorization: Bearer $GITHUB_TOKEN" \
-            ${{ vars.DEP_STORE }}/main/libs/revit/2026/RevitAPIUI.dll \
+
+          curl -L -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
+            "${{ vars.DEP_STORE }}/releases/download/2026deps/RevitAPIUI.dll" \
             -o revit-api/RevitAPIUI.dll
 
-          # Debug to confirm files exist
+          # sanity check
           ls -lh revit-api
 
       - name: Setup .NET
