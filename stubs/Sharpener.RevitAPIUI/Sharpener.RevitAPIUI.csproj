@@ -4,6 +4,8 @@
     <TargetFramework>netstandard2.0</TargetFramework>
     <RootNamespace>Autodesk.Revit.UI</RootNamespace>
     <GenerateDocumentationFile>false</GenerateDocumentationFile>
+    <IsPackable>false</IsPackable>
+    <IsPublishable>false</IsPublishable>
   </PropertyGroup>
 
   <ItemGroup>
