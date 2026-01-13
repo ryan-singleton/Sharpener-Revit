@@ -1,8 +1,6 @@
 // The Sharpener project licenses this file to you under the MIT license.
 
-using System;
 using System.IO;
-using System.Linq;
 using System.Reflection;
 using System.Windows.Media.Imaging;
 using Sharpener.Revit.Ribbon;

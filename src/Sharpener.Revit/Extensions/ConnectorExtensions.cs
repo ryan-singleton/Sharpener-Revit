@@ -169,8 +169,10 @@ public static class ConnectorExtensions
 
     /// <summary>
     ///     Attempts to connect two elements by finding the closest pair of <see cref="Connector" />s between the two of them
-    ///     and then connecting them. If <paramref name="allowMove"/> is false, this only makes the connection within the tolerance
-    ///     (1.0e-09), which is prescribed by Revit itself to achieve success. If <paramref name="allowMove"/> is true, it will
+    ///     and then connecting them. If <paramref name="allowMove" /> is false, this only makes the connection within the
+    ///     tolerance
+    ///     (1.0e-09), which is prescribed by Revit itself to achieve success. If <paramref name="allowMove" /> is true, it
+    ///     will
     ///     move <paramref name="element" /> to <paramref name="destinationElement" /> and then make the connection.
     /// </summary>
     /// <param name="element">The first element to connect.</param>

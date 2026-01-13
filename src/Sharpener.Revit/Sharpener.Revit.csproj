@@ -25,7 +25,7 @@
     <Folder Include="Docs\"/>
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Sharpener" />
+    <PackageReference Include="Sharpener"/>
   </ItemGroup>
   <Import Project="..\..\build\RevitReferences.props"/>
 </Project>

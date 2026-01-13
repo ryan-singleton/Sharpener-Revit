@@ -4,7 +4,7 @@ namespace Autodesk.Revit.DB;
 
 public class Element
 {
-    public ElementId Id { get; set; }  = new();
+    public ElementId Id { get; set; } = new();
 
     public Document Document { get; set; } = new();
 }

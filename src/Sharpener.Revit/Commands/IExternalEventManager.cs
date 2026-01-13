@@ -1,6 +1,5 @@
 // The Sharpener project licenses this file to you under the MIT license.
 
-using System;
 using Autodesk.Revit.UI;
 
 namespace Sharpener.Revit.Commands;

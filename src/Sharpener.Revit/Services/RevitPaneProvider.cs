@@ -1,6 +1,5 @@
 // The Sharpener project licenses this file to you under the MIT license.
 
-using Autodesk.Revit.DB.Events;
 using Autodesk.Revit.UI;
 using Sharpener.Revit.Controls;
 
@@ -34,14 +33,17 @@ public class RevitPaneProvider
     }
 
     /// <summary>
-    /// Registers all <see cref="RevitPane"/>s that were added to the <see cref="IServiceProvider"/>.
+    ///     Registers all <see cref="RevitPane" />s that were added to the <see cref="IServiceProvider" />.
     /// </summary>
     /// <remarks>
-    /// This needs to happen immediately after the <see cref="IServiceProvider"/> is built and before the Revit tries to establish its UI.
+    ///     This needs to happen immediately after the <see cref="IServiceProvider" /> is built and before the Revit tries to
+    ///     establish its UI.
     /// </remarks>
     public void RegisterAll()
     {
         foreach (var pane in _revitPanes)
+        {
             _application.RegisterDockablePane(pane.DockablePaneId, pane.PaneName, pane);
+        }
     }
 }
