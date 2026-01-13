@@ -11,11 +11,15 @@
       <Private>true</Private>
       <IncludeAssets>compile</IncludeAssets>
       <PrivateAssets>all</PrivateAssets>
+      <ExcludeAssets>runtime</ExcludeAssets>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
     </ProjectReference>
     <ProjectReference Include="..\..\stubs\Sharpener.RevitAPIUI\Sharpener.RevitAPIUI.csproj">
       <Private>true</Private>
       <IncludeAssets>compile</IncludeAssets>
       <PrivateAssets>all</PrivateAssets>
+      <ExcludeAssets>runtime</ExcludeAssets>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
     </ProjectReference>
   </ItemGroup>
 
