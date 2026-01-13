@@ -4,8 +4,6 @@
     <Company>North of Real</Company>
     <ImplicitUsings>enable</ImplicitUsings>
     <LangVersion>latestmajor</LangVersion>
-    <Nullable>enable</Nullable>
-    <RepositoryType>git</RepositoryType>
-    <RepositoryUrl>https://github.com/ryan-singleton/Sharpener-Revit</RepositoryUrl>
+    <Nullable>enable</Nullable>   
   </PropertyGroup>
 </Project>

@@ -1,3 +1,7 @@
 <Project>
   <Import Project="..\build\Global.props"/>
+  <PropertyGroup>
+    <IsPackable>false</IsPackable>
+    <IsPublishable>false</IsPublishable>
+  </PropertyGroup>
 </Project>
