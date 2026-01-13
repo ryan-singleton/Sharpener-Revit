@@ -1,27 +1,39 @@
 name: Build and Deploy NuGet Package
 on:
   push:
+    branches: [main, develop]
     paths:
       - '.github/workflows/**'
       - 'src/**'
-    branches:
-      - main
-      - develop
   pull_request:
+    branches: [main, develop]
     paths:
       - '.github/workflows/**'
       - 'src/**'
     types: [closed]
-    branches:
-      - main
-      - develop
+
 jobs:
   build-and-deploy:
     runs-on: windows-latest
-    name: Update NuGet Package
+    permissions:
+      contents: read
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
+
+      - name: Download Revit API DLLs
+        shell: bash
+        run: |
+          mkdir -p revit-api
+          curl -L -H "Authorization: Bearer $GITHUB_TOKEN" \
+            ${{ vars.DEP_STORE }}/main/libs/revit/2026/RevitAPI.dll \
+            -o revit-api/RevitAPI.dll
+          curl -L -H "Authorization: Bearer $GITHUB_TOKEN" \
+            ${{ vars.DEP_STORE }}/main/libs/revit/2026/RevitAPIUI.dll \
+            -o revit-api/RevitAPIUI.dll
+
+          # Debug to confirm files exist
+          ls -lh revit-api
 
       - name: Setup .NET
         uses: actions/setup-dotnet@v3
@@ -31,44 +43,24 @@ jobs:
             8.0.x
 
       - name: Restore dependencies
-        run: |
-          dotnet restore --source "https://api.nuget.org/v3/index.json" --no-cache
-          if ! dotnet nuget list source | grep -q "nuget.org"; then
-            dotnet nuget add source "https://api.nuget.org/v3/index.json" \
-              --name "nuget.org" \
-              --username ${{ secrets.NUGET_PUBLISH_USERNAME }} \
-              --password ${{ secrets.NUGET_PUBLISH_API_KEY }}
-          fi
-        shell: bash
-
-      - name: Download Revit API DLLs
         shell: bash
         run: |
-          mkdir -p revit-api
+          dotnet restore --source "https://api.nuget.org/v3/index.json"
 
-          curl -L \
-          -H "Authorization: Bearer $GITHUB_TOKEN" \
-          ${{ vars.DEP_STORE }}/main/libs/revit/2026/RevitAPI.dll \
-          -o revit-api/RevitAPI.dll
-
-          curl -L \
-          -H "Authorization: Bearer $GITHUB_TOKEN" \
-          ${{ vars.DEP_STORE }}/main/libs/revit/2026/RevitAPIUI.dll \
-          -o revit-api/RevitAPIUI.dll
-
-      - name: Build and package
+      - name: Build and Pack
         shell: bash
         run: |
-          dotnet build --configuration Release --no-restore --source https://api.nuget.org/v3/index.json --verbosity minimal
-          if [[ "${{ github.ref }}" != "refs/heads/main" ]]; then
-            dotnet pack --configuration Release --no-restore --no-build --output ./bin/Release --version-suffix "alpha-${{ github.sha }}"
+          dotnet build --configuration Release --verbosity minimal
+          if [[ "${GITHUB_REF}" != "refs/heads/main" ]]; then
+            dotnet pack --configuration Release --no-build --output ./bin/Release --version-suffix "alpha-${GITHUB_SHA}"
           else
-            dotnet pack --configuration Release --no-restore --no-build --output ./bin/Release
+            dotnet pack --configuration Release --no-build --output ./bin/Release
           fi
 
-      - name: Publish package to nuget.org
+      - name: Publish package to NuGet
         shell: bash
         run: |
-          for PACKAGE in $(ls ./bin/Release/*.nupkg); do
-            dotnet nuget push $PACKAGE -s "https://api.nuget.org/v3/index.json" -k ${{ secrets.NUGET_PUBLISH_API_KEY }} --skip-duplicate
+          for PACKAGE in ./bin/Release/*.nupkg; do
+            dotnet nuget push $PACKAGE -s "https://api.nuget.org/v3/index.json" \
+              -k ${{ secrets.NUGET_PUBLISH_API_KEY }} --skip-duplicate
           done

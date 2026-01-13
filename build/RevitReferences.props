@@ -4,7 +4,7 @@
     <HasLocalRevitApi Condition="Exists('$(RevitApiPath)\RevitAPI.dll')">true</HasLocalRevitApi>
 
     <RepoRoot>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..'))</RepoRoot>
-    <DownloadedRevitApiPath>$(RepoRoot)/revit-api</DownloadedRevitApiPath>
+    <DownloadedRevitApiPath>$([System.IO.Path]::Combine('$(RepoRoot)', 'revit-api'))</DownloadedRevitApiPath>
     <HasDownloadedRevitApi Condition="Exists('$(DownloadedRevitApiPath)\RevitAPI.dll')">true</HasDownloadedRevitApi>
   </PropertyGroup>
 
