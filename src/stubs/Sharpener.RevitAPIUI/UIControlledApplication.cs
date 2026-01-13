@@ -7,7 +7,7 @@ public class UIControlledApplication
 {
     public delegate void ThemeChangedEventHandler(object sender, ThemeChangedEventArgs args);
 
-    public ControlledApplication ControlledApplication { get; set; }
+    public ControlledApplication ControlledApplication { get; set; } = new();
 
     public RibbonPanel CreateRibbonPanel(string name, string panelName)
     {

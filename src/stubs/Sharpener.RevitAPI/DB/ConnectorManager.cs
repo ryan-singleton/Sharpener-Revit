@@ -4,7 +4,7 @@ namespace Autodesk.Revit.DB;
 
 public class ConnectorManager
 {
-    public ConnectorSet Connectors { get; set; }
+    public ConnectorSet Connectors { get; set; } = [];
 
-    public ConnectorSet UnusedConnectors { get; set; }
+    public ConnectorSet UnusedConnectors { get; set; } = new();
 }

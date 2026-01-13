@@ -4,5 +4,5 @@ namespace Autodesk.Revit.DB;
 
 public class FamilyInstance : Element
 {
-    public MEPModel MEPModel { get; set; }
+    public MEPModel MEPModel { get; set; } = new();
 }

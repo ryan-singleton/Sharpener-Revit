@@ -4,5 +4,5 @@ namespace Autodesk.Revit.DB;
 
 public class FabricationPart : Element
 {
-    public ConnectorManager ConnectorManager { get; set; }
+    public ConnectorManager ConnectorManager { get; set; }  = new();
 }

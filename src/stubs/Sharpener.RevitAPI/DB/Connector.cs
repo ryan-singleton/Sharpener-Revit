@@ -6,13 +6,13 @@ public class Connector
 {
     public bool IsConnected { get; set; }
 
-    public ConnectorSet AllRefs { get; set; }
+    public ConnectorSet AllRefs { get; set; } = new();
 
-    public XYZ Origin { get; set; }
+    public XYZ Origin { get; set; } = new();
 
-    public Element Owner { get; set; }
+    public Element Owner { get; set; } = new();
 
-    public ConnectorType ConnectorType { get; set; }
+    public ConnectorType ConnectorType { get; set; } = new();
 
     public void DisconnectFrom(Connector connector)
     {

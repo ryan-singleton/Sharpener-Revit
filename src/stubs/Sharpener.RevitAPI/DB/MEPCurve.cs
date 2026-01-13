@@ -5,5 +5,5 @@ namespace Autodesk.Revit.DB;
 // ReSharper disable once InconsistentNaming
 public class MEPCurve : Element
 {
-    public ConnectorManager ConnectorManager { get; set; }
+    public ConnectorManager ConnectorManager { get; set; } = new();
 }

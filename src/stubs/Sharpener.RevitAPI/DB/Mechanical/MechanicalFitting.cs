@@ -4,5 +4,4 @@ namespace Autodesk.Revit.DB.Mechanical;
 
 public class MechanicalFitting : MEPModel
 {
-    public ConnectorManager ConnectorManager { get; set; }
 }

@@ -6,5 +6,5 @@ namespace Autodesk.Revit.UI;
 
 public class ControlledApplication
 {
-    public event EventHandler<ApplicationInitializedEventArgs> ApplicationInitialized;
+    public event EventHandler<ApplicationInitializedEventArgs> ApplicationInitialized = (sender, args) => { };
 }

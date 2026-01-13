@@ -169,14 +169,14 @@ public static class ConnectorExtensions
 
     /// <summary>
     ///     Attempts to connect two elements by finding the closest pair of <see cref="Connector" />s between the two of them
-    ///     and then connecting them. If <see cref="allowMove" /> is false, this only makes the connection within the tolerance
-    ///     (1.0e-09), which is prescribed by Revit itself to achieve success. If <see cref="allowMove" /> is true, it will
-    ///     move <see cref="element" /> to <see cref="destinationElement" /> and then make the connection.
+    ///     and then connecting them. If <paramref name="allowMove"/> is false, this only makes the connection within the tolerance
+    ///     (1.0e-09), which is prescribed by Revit itself to achieve success. If <paramref name="allowMove"/> is true, it will
+    ///     move <paramref name="element" /> to <paramref name="destinationElement" /> and then make the connection.
     /// </summary>
     /// <param name="element">The first element to connect.</param>
     /// <param name="destinationElement">The second element to connect.</param>
     /// <param name="allowMove">
-    ///     Whether to allow moving <see cref="element" /> to <see cref="destinationElement" /> to achieve
+    ///     Whether to allow moving <paramref name="element" /> to <paramref name="destinationElement" /> to achieve
     ///     the connection. Defaults to false.
     /// </param>
     /// <returns>True if the connection was made, false if it was not.</returns>
