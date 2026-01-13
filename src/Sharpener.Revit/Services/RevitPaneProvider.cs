@@ -21,7 +21,6 @@ public class RevitPaneProvider
     {
         _application = application;
         _revitPanes = revitPanes;
-        application.ControlledApplication.ApplicationInitialized += OnInitialized;
     }
 
     /// <summary>
@@ -34,11 +33,15 @@ public class RevitPaneProvider
         return _revitPanes.OfType<T>().FirstOrDefault();
     }
 
-    private void OnInitialized(object? sender, ApplicationInitializedEventArgs e)
+    /// <summary>
+    /// Registers all <see cref="RevitPane"/>s that were added to the <see cref="IServiceProvider"/>.
+    /// </summary>
+    /// <remarks>
+    /// This needs to happen immediately after the <see cref="IServiceProvider"/> is built and before the Revit tries to establish its UI.
+    /// </remarks>
+    public void RegisterAll()
     {
         foreach (var pane in _revitPanes)
-        {
             _application.RegisterDockablePane(pane.DockablePaneId, pane.PaneName, pane);
-        }
     }
 }
