@@ -21,6 +21,7 @@ jobs:
     name: Update NuGet Package
     steps:
       - name: Download Revit API DLLs
+        shell: bash
         run: |
           mkdir -p revit-api
 
