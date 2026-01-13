@@ -5,7 +5,7 @@ namespace Autodesk.Revit.UI;
 // ReSharper disable once InconsistentNaming
 public class UIControlledApplication
 {
-    public delegate void ThemeChangedEventHandler(object sender, ThemeChangedEventArgs args);
+    public event EventHandler<ThemeChangedEventArgs> ThemeChanged = null!;
 
     public ControlledApplication ControlledApplication { get; set; } = new();
 
@@ -17,8 +17,6 @@ public class UIControlledApplication
     public void CreateRibbonTab(string tabName)
     {
     }
-
-    public event ThemeChangedEventHandler? ThemeChanged;
 
     protected virtual void OnThemeChanged(ThemeChangedEventArgs args)
     {
