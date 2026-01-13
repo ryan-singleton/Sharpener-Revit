@@ -20,22 +20,6 @@ jobs:
     runs-on: windows-latest
     name: Update NuGet Package
     steps:
-      - name: Download Revit API DLLs
-        shell: bash
-        run: |
-          mkdir -p revit-api
-
-          curl -L \
-          -H "Authorization: Bearer $GITHUB_TOKEN" \
-          ${{ vars.DEP_STORE }}/main/libs/revit/2026/RevitAPI.dll \
-          -o revit-api/RevitAPI.dll
-
-          curl -L \
-          -H "Authorization: Bearer $GITHUB_TOKEN" \
-          ${{ vars.DEP_STORE }}/main/libs/revit/2026/RevitAPIUI.dll \
-          -o revit-api/RevitAPIUI.dll
-
-
       - name: Checkout code
         uses: actions/checkout@v3
 
@@ -56,6 +40,21 @@ jobs:
               --password ${{ secrets.NUGET_PUBLISH_API_KEY }}
           fi
         shell: bash
+
+      - name: Download Revit API DLLs
+        shell: bash
+        run: |
+          mkdir -p revit-api
+
+          curl -L \
+          -H "Authorization: Bearer $GITHUB_TOKEN" \
+          ${{ vars.DEP_STORE }}/main/libs/revit/2026/RevitAPI.dll \
+          -o revit-api/RevitAPI.dll
+
+          curl -L \
+          -H "Authorization: Bearer $GITHUB_TOKEN" \
+          ${{ vars.DEP_STORE }}/main/libs/revit/2026/RevitAPIUI.dll \
+          -o revit-api/RevitAPIUI.dll
 
       - name: Build and package
         shell: bash
