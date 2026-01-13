@@ -26,12 +26,12 @@ jobs:
 
           curl -L \
           -H "Authorization: Bearer $GITHUB_TOKEN" \
-          ${{ secrets.NUGET_PUBLISH_USERNAME }}/main/libs/revit/2026/RevitAPI.dll \
+          ${{ vars.DEP_STORE }}/main/libs/revit/2026/RevitAPI.dll \
           -o revit-api/RevitAPI.dll
 
           curl -L \
           -H "Authorization: Bearer $GITHUB_TOKEN" \
-          ${{ secrets.NUGET_PUBLISH_USERNAME }}/main/libs/revit/2026/RevitAPIUI.dll \
+          ${{ vars.DEP_STORE }}/main/libs/revit/2026/RevitAPIUI.dll \
           -o revit-api/RevitAPIUI.dll
 
       - name: Checkout code
