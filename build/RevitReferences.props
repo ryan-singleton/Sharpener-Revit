@@ -3,8 +3,8 @@
     <RevitApiPath>C:\Program Files\Autodesk\Revit 2026</RevitApiPath>
     <HasLocalRevitApi Condition="Exists('$(RevitApiPath)\RevitAPI.dll')">true</HasLocalRevitApi>
 
-    <RepoRoot>$(MSBuildThisFileDirectory)..</RepoRoot>
-    <DownloadedRevitApiPath>$(RepoRoot)\revit-api</DownloadedRevitApiPath>
+    <RepoRoot>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..'))</RepoRoot>
+    <DownloadedRevitApiPath>$(RepoRoot)/revit-api</DownloadedRevitApiPath>
     <HasDownloadedRevitApi Condition="Exists('$(DownloadedRevitApiPath)\RevitAPI.dll')">true</HasDownloadedRevitApi>
   </PropertyGroup>
 
