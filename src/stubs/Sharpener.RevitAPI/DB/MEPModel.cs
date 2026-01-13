@@ -2,7 +2,7 @@
 
 namespace Autodesk.Revit.DB;
 
-public class FabricationPart : Element
+public class MEPModel : FamilyInstance
 {
     public ConnectorManager ConnectorManager { get; set; }
 }

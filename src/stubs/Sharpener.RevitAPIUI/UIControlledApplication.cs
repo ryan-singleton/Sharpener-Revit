@@ -7,6 +7,8 @@ public class UIControlledApplication
 {
     public delegate void ThemeChangedEventHandler(object sender, ThemeChangedEventArgs args);
 
+    public ControlledApplication ControlledApplication { get; set; }
+
     public RibbonPanel CreateRibbonPanel(string name, string panelName)
     {
         return new RibbonPanel();
@@ -21,5 +23,9 @@ public class UIControlledApplication
     protected virtual void OnThemeChanged(ThemeChangedEventArgs args)
     {
         ThemeChanged?.Invoke(this, args);
+    }
+
+    public void RegisterDockablePane(DockablePaneId id, string title, IDockablePaneProvider provider)
+    {
     }
 }

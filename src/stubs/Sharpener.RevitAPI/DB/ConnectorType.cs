@@ -2,7 +2,6 @@
 
 namespace Autodesk.Revit.DB;
 
-public class MechanicalFitting: FamilyInstance
+public class ConnectorType
 {
-
 }

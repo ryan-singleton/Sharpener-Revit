@@ -1,7 +1,5 @@
 // The Sharpener project licenses this file to you under the MIT license.
 
-using System.Collections.Generic;
-
 namespace Autodesk.Revit.UI.Selection;
 
 public class Selection

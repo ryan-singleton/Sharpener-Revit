@@ -1,8 +1,8 @@
 // The Sharpener project licenses this file to you under the MIT license.
 
-namespace Autodesk.Revit.DB;
+namespace Autodesk.Revit.DB.Mechanical;
 
-public class FabricationPart : Element
+public class MechanicalFitting : MEPModel
 {
     public ConnectorManager ConnectorManager { get; set; }
 }

@@ -11,5 +11,19 @@ public class Connector
     public XYZ Origin { get; set; }
 
     public Element Owner { get; set; }
-}
 
+    public ConnectorType ConnectorType { get; set; }
+
+    public void DisconnectFrom(Connector connector)
+    {
+    }
+
+    public void ConnectTo(Connector connector)
+    {
+    }
+
+    public MEPConnectorInfo GetMEPConnectorInfo()
+    {
+        return new MEPConnectorInfo();
+    }
+}

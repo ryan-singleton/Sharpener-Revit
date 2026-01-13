@@ -2,7 +2,7 @@
 
 namespace Autodesk.Revit.DB;
 
-public class FamilyInstance: Element
+public class FamilyInstance : Element
 {
-
+    public MEPModel MEPModel { get; set; }
 }
