@@ -1,9 +1,0 @@
-// The Sharpener project licenses this file to you under the MIT license.
-
-namespace Autodesk.Revit.DB;
-
-public class MEPConnectorInfo
-{
-    public bool IsPrimary { get; set; }
-    public bool IsSecondary { get; set; }
-}
