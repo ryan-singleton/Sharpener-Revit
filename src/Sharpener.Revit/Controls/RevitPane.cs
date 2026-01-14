@@ -2,8 +2,6 @@
 
 using System.Windows.Controls;
 using Autodesk.Revit.UI;
-using Sharpener.Revit.Extensions;
-using Sharpener.Revit.Ui;
 
 namespace Sharpener.Revit.Controls;
 
@@ -15,18 +13,11 @@ public class RevitPane : Page, IDockablePaneProvider
     /// <summary>
     ///     Instantiates a new Revit dockable pane.
     /// </summary>
-    /// <param name="uiApplication">The associated <see cref="UIControlledApplication" /> for this pane.</param>
     /// <param name="paneName">The name of the pane, which can be searched for later, or can feed its own labels and controls.</param>
-    /// <param name="themeSyncOptions">The optional action to take on the synchronization settings before applying them.</param>
-    protected RevitPane(UIControlledApplication uiApplication, string paneName,
-        Action<SyncRevitThemeOptions<RevitPane>>? themeSyncOptions = null)
+    protected RevitPane(string paneName)
     {
         PaneName = paneName;
         DockablePaneId = new DockablePaneId(Guid.NewGuid());
-        if (themeSyncOptions is not null)
-        {
-            uiApplication.SyncRevitTheme(this, themeSyncOptions);
-        }
     }
 
     /// <summary>
