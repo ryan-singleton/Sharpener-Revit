@@ -27,6 +27,7 @@ jobs:
           repository: ${{ vars.DEP_STORE }}
           token: ${{ secrets.GITHUB_TOKEN }}
           path: revit-api-temp
+          ref: main
 
       - name: Copy Revit DLLs to expected folder
         shell: bash
