@@ -21,20 +21,19 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      - name: Download Revit API DLLs from Release
+      - name: Checkout dependencies code
+        uses: actions/checkout@v3
+        with:
+          repository: ${{ vars.DEP_STORE }}
+          token: ${{ secrets.GITHUB_TOKEN }}
+          path: revit-api-temp
+
+      - name: Copy Revit DLLs to expected folder
         shell: bash
         run: |
           mkdir -p revit-api
-
-          curl -L -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
-            "${{ vars.DEP_STORE }}/releases/download/2026deps/RevitAPI.dll" \
-            -o revit-api/RevitAPI.dll
-
-          curl -L -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
-            "${{ vars.DEP_STORE }}/releases/download/2026deps/RevitAPIUI.dll" \
-            -o revit-api/RevitAPIUI.dll
-
-          # sanity check
+          cp revit-api-temp/libs/revit/2026/RevitAPI.dll revit-api/
+          cp revit-api-temp/libs/revit/2026/RevitAPIUI.dll revit-api/
           ls -lh revit-api
 
       - name: Setup .NET
