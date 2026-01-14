@@ -1,9 +1,9 @@
 // The Sharpener project licenses this file to you under the MIT license.
 
-using System.Windows;
 using System.Windows.Controls;
 using Autodesk.Revit.UI;
 using Sharpener.Revit.Extensions;
+using Sharpener.Revit.Ui;
 
 namespace Sharpener.Revit.Controls;
 
@@ -17,15 +17,16 @@ public class RevitPane : Page, IDockablePaneProvider
     /// </summary>
     /// <param name="uiApplication">The associated <see cref="UIControlledApplication" /> for this pane.</param>
     /// <param name="paneName">The name of the pane, which can be searched for later, or can feed its own labels and controls.</param>
-    protected RevitPane(UIControlledApplication uiApplication, string paneName)
+    /// <param name="themeSyncOptions">The optional action to take on the synchronization settings before applying them.</param>
+    protected RevitPane(UIControlledApplication uiApplication, string paneName,
+        Action<SyncRevitThemeOptions<RevitPane>>? themeSyncOptions = null)
     {
         PaneName = paneName;
         DockablePaneId = new DockablePaneId(Guid.NewGuid());
-        uiApplication.SyncRevitTheme(this, options =>
+        if (themeSyncOptions is not null)
         {
-            options.OnStartup = ApplySynchronizedTheme;
-            options.OnUiThemeChanged = ApplySynchronizedTheme;
-        });
+            uiApplication.SyncRevitTheme(this, themeSyncOptions);
+        }
     }
 
     /// <summary>
@@ -43,11 +44,5 @@ public class RevitPane : Page, IDockablePaneProvider
     {
         data.FrameworkElement = this;
         data.InitialState = new DockablePaneState();
-    }
-
-    private static void ApplySynchronizedTheme(DependencyObject dependencyObject)
-    {
-        //todo: we need to build UI libraries with the two themes to actually use this, but keep it around for a minute
-        //dependencyObject.ApplyTheme(UIThemeManager.CurrentTheme == UITheme.Dark ? Theme.Dark : Theme.Light);
     }
 }
