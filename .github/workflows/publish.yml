@@ -25,7 +25,7 @@ jobs:
         uses: actions/checkout@v3
         with:
           repository: ${{ vars.DEP_STORE }}
-          token: ${{ secrets.NUGET_PUBLISH_API_KEY }}
+          token: ${{ secrets.REPO_PAT }}
           path: revit-api-temp
           ref: main
 
