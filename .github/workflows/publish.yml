@@ -39,7 +39,7 @@ jobs:
 
       - name: Setup .NET
         uses: actions/setup-dotnet@v3
-        with: 
+        with:
           dotnet-version: |
             5.0.x
             8.0.x
@@ -60,7 +60,7 @@ jobs:
           fi
 
       - name: Publish package to NuGet
-        shell: bash
+        shell: bash 
         run: |
           for PACKAGE in ./bin/Release/*.nupkg; do
             dotnet nuget push $PACKAGE -s "https://api.nuget.org/v3/index.json" \
