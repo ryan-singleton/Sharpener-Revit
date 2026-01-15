@@ -14,10 +14,15 @@ public class RevitPane : Page, IDockablePaneProvider
     ///     Instantiates a new Revit dockable pane.
     /// </summary>
     /// <param name="paneName">The name of the pane, which can be searched for later, or can feed its own labels and controls.</param>
-    protected RevitPane(string paneName)
+    /// <param name="dockablePaneId">
+    ///     Optional <see cref="Guid" /> that will be used to generate the
+    ///     <see cref="DockablePaneId" /> for this <see cref="IDockablePaneProvider" />. If null, a random new one will be
+    ///     generated specific to the Revit session.
+    /// </param>
+    protected RevitPane(string paneName, Guid? dockablePaneId = null)
     {
         PaneName = paneName;
-        DockablePaneId = new DockablePaneId(Guid.NewGuid());
+        DockablePaneId = new DockablePaneId(dockablePaneId ?? Guid.NewGuid());
     }
 
     /// <summary>
